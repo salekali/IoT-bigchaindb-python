@@ -3,6 +3,8 @@ from bigchaindb_driver import BigchainDB
 from bigchaindb_driver.crypto import generate_keypair
 from time import sleep
 from sys import exit
+from time import strftime
+
 
 #script to read system temperature from RPi and save to file
 os.system("/opt/vc/bin/vcgencmd measure_temp > sysTemp")
@@ -32,7 +34,9 @@ reading_asset = {
  'data': {
   'reading':{
    'serial number': 'pi01',
-   'manufacturer' : 'arm' 
+   'manufacturer' : 'arm'    'temperature': temp,
+   'day': strftime("%D"),
+   'time': strftime("%X")
   },
  },
 }
@@ -40,7 +44,6 @@ reading_asset = {
 #Add metadata
 reading_metadata = {
  'message': 'Here is the temperature of the Raspberry Pi!',
- 'temperature': temp
 }
 
 #Prepare a 'create' transaction
